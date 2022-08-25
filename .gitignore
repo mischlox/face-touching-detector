@@ -1,0 +1,10 @@
+# Binaries and Deps
+build/
+deps/
+
+# IntelliJ
+.idea/
+
+# Models
+models/*.onnx
+models/*.tflite
