@@ -1,9 +1,7 @@
-#include "yolov5.h"
-
+#include <ft-detector/yolov5.h>
 #include <spdlog/spdlog.h>
 
-YoloV5::YoloV5(const std::string &modelPath, const std::string &classListPath) {
-}
+YoloV5::YoloV5(const std::string &modelPath, const std::string &classListPath) {}
 
 void YoloV5::loadNet(const std::string &model_path) {}
 

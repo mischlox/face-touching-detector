@@ -1,11 +1,10 @@
+#include <ft-detector/detectors.h>
 #include <spdlog/spdlog.h>
-
-#include "detector/detectors.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         spdlog::warn(
-            "Usage: ./face-touching-detector <model-path> <class-names-path> "
+            "Usage: ./face-touching-ft-detector <model-path> <class-names-path> "
             "<input-path>");
         return -1;
     }

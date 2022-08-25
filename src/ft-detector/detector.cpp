@@ -1,5 +1,4 @@
-#include "detector.h"
-
+#include <ft-detector/detector.h>
 #include <spdlog/spdlog.h>
 
 void Detector::loadClassList(const std::string &labelFile) {
@@ -45,11 +44,9 @@ void Detector::detectVideo(const std::string &videoPath, bool show) {
 
 void Detector::detectImage(const std::string &imgPath, bool show) {}
 
-void Detector::drawBoxes(cv::Mat &img,
-                         const std::vector<Detection> &detections) {
-    const std::vector<cv::Scalar> colors = {
-        cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0), cv::Scalar(0, 255, 255),
-        cv::Scalar(255, 0, 0)};
+void Detector::drawBoxes(cv::Mat &img, const std::vector<Detection> &detections) {
+    const std::vector<cv::Scalar> colors = {cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0),
+                                            cv::Scalar(0, 255, 255), cv::Scalar(255, 0, 0)};
 
     for (const auto &detection : detections) {
         auto box = detection.box;
@@ -57,8 +54,8 @@ void Detector::drawBoxes(cv::Mat &img,
         const auto color = colors[classId % colors.size()];
         cv::rectangle(img, box, color, 3);
 
-        cv::rectangle(img, cv::Point(box.x, box.y - 20),
-                      cv::Point(box.x + box.width, box.y), color, cv::FILLED);
+        cv::rectangle(img, cv::Point(box.x, box.y - 20), cv::Point(box.x + box.width, box.y), color,
+                      cv::FILLED);
         cv::putText(img, classNames_[classId], cv::Point(box.x, box.y - 5),
                     cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
     }

@@ -1,10 +1,10 @@
 #ifndef YOLOV5_H
 #define YOLOV5_H
 
-#include <opencv2/opencv.hpp>
+#include <ft-detector/detector.h>
+#include <ft-detector/yolov5_config.h>
 
-#include "../detector.h"
-#include "yolov5_config.h"
+#include <opencv4/opencv2/opencv.hpp>
 
 class YoloV5 : public Detector {
    public:

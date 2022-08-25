@@ -1,6 +1,6 @@
 #ifndef FACE_TOUCHING_DETECTOR_DETECTORS
 #define FACE_TOUCHING_DETECTOR_DETECTORS
-#include "yolov5/yolov5.h"
+#include <ft-detector/yolov5.h>
 
 /**
  * Detector Factory
