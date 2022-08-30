@@ -21,21 +21,24 @@ class Detector {
      * @param img
      * @param detections
      */
-    virtual void detect(const cv::Mat &img,
-                        std::vector<Detection> &detections) = 0;
+    virtual void detect(const cv::Mat &img, std::vector<Detection> &detections) = 0;
 
-    virtual void loadNet(const std::string &model_path) = 0;
+    virtual void loadModel(const std::string &model_path) = 0;
 
-    void loadClassList(const std::string &labelFile);
+    void readLabels(const std::string &labelFile);
 
     void drawBoxes(cv::Mat &img, const std::vector<Detection> &detections);
+
+    bool boxesOverlap(const std::vector<Detection> &detections);
 
     void detectImage(const std::string &imgPath, bool show = true);
 
     void detectVideo(const std::string &videoPath, bool show = true);
 
+    std::vector<std::string> getLabels() { return labels_; }
+
    protected:
-    std::vector<std::string> classNames_;
+    std::vector<std::string> labels_;
 };
 
 #endif  // DETECTOR_H

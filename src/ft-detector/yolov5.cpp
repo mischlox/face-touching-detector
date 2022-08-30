@@ -1,9 +1,11 @@
 #include <ft-detector/yolov5.h>
 #include <spdlog/spdlog.h>
 
-YoloV5::YoloV5(const std::string &modelPath, const std::string &classListPath) {}
+YoloV5::YoloV5(const std::string &modelPath, const std::string &labelsPath) {}
 
-void YoloV5::loadNet(const std::string &model_path) {}
+void YoloV5::loadModel(const std::string &modelPath) {
+    model_ = std::make_unique<torch::jit::script::Module>(torch::jit::load(modelPath));
+}
 
 void YoloV5::preprocess(cv::Mat &img) {}
 
