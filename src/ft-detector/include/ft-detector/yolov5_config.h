@@ -1,12 +1,5 @@
-//
-// Created by mischlox on 22.08.22.
-//
-
 #ifndef YOLOV5_CONFIG_H
 #define YOLOV5_CONFIG_H
-
-// TFLite specific
-constexpr int NUM_THREADS = 4;
 
 // YoloV5 specific
 constexpr float INPUT_WIDTH = 640.0;
