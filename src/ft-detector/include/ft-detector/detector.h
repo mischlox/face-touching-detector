@@ -15,12 +15,6 @@ struct Detection {
 
 class Detector {
    public:
-    /**
-     * Run detect
-     *
-     * @param img
-     * @param detections
-     */
     virtual void detect(const cv::Mat &img, std::vector<Detection> &detections) = 0;
 
     virtual void loadModel(const std::string &model_path) = 0;

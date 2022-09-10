@@ -32,17 +32,26 @@ void Detector::detectVideo(const std::string &videoPath, bool show) {
             if (show) {
                 drawBoxes(frame, detections);
                 cv::imshow("output", frame);
+                if (cv::waitKey(5) >= 0) {
+                    cap.release();
+                    std::cout << "finished by user\n";
+                    break;
+                }
             }
-        }
-        if (cv::waitKey(1) != -1) {
-            cap.release();
-            std::cout << "finished by user\n";
-            break;
         }
     }
 }
 
-void Detector::detectImage(const std::string &imgPath, bool show) {}
+void Detector::detectImage(const std::string &imgPath, bool show) {
+    cv::Mat img = cv::imread(imgPath);
+    std::vector<Detection> detections;
+    detect(img, detections);
+    if (show) {
+        drawBoxes(img, detections);
+        cv::imshow("output", img);
+        cv::waitKey(0);
+    }
+}
 
 void Detector::drawBoxes(cv::Mat &img, const std::vector<Detection> &detections) {
     const std::vector<cv::Scalar> colors = {cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0),
