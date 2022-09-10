@@ -6,7 +6,9 @@ class DetectorTest : public ::testing::Test {
     std::unique_ptr<Detector> detector;
     std::vector<Detection> detections;
 
-    void SetUp() override { detector = Detectors::yolov5("", ""); }
+    void SetUp() override {
+        detector = Detectors::yolov5("models/detector_cpu.torchscript", "labels/classes.txt");
+    }
 
     void TearDown() override {}
 };
@@ -47,5 +49,9 @@ TEST_F(DetectorTest, readLabels_txtFile_correct) {
 };
 
 TEST_F(DetectorTest, readModel_noError) {
-    ASSERT_NO_FATAL_FAILURE(detector->loadModel("models/best.torchscript"));
+    ASSERT_NO_FATAL_FAILURE(detector->loadModel("models/detector_cpu.torchscript"));
 };
+
+TEST_F(DetectorTest, runDetect_noError) {
+    ASSERT_NO_FATAL_FAILURE(detector->detectVideo("/dev/video0"));
+}
