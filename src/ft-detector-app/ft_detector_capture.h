@@ -19,6 +19,8 @@ class FTdetectorCapture : public QThread {
     cv::Mat frame() const { return frame_; }
    signals:
     void newPixMapCaptured();
+    void boxesOverlap();
+    void boxesDoNotOverlap();
 
    protected:
     void run() override;

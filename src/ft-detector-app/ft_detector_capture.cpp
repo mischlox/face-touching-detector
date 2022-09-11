@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-FTdetectorCapture::FTdetectorCapture(QObject *parent) : QThread(parent), videoCap_(0) {}
+FTdetectorCapture::FTdetectorCapture(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {}
 
 void FTdetectorCapture::run() {
     auto detector = Detectors::yolov5("models/detector_gpu.torchscript", "labels/classes.txt");
@@ -16,6 +16,11 @@ void FTdetectorCapture::run() {
                 detector->drawBoxes(frame_, detections);
                 pixmap_ = cvMatToQPixmap(frame_);
                 emit newPixMapCaptured();
+            }
+            if (detector->boxesOverlap(detections)) {
+                emit boxesOverlap();
+            } else {
+                emit boxesDoNotOverlap();
             }
         }
     }

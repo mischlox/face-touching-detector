@@ -23,8 +23,9 @@ class MainWindow : public QMainWindow {
     void on_ocvButton_clicked();
 
    private:
-    Ui::MainWindow *ui;
-    FTdetectorCapture *cap_;
+    std::unique_ptr<Ui::MainWindow> ui;
+
+    std::unique_ptr<FTdetectorCapture> cap_;
 };
 
 #endif  // FACE_TOUCHING_DETECTOR_MAIN_WINDOW_H
