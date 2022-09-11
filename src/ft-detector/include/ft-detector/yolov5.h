@@ -3,7 +3,11 @@
 
 #include <ft-detector/detector.h>
 #include <ft-detector/yolov5_config.h>
+
+// QT also uses slots so undef before including to avoid conflicts
+#undef slots
 #include <torch/script.h>
+#define slots Q_SLOTS
 
 #include <opencv4/opencv2/opencv.hpp>
 
