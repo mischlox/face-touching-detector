@@ -7,7 +7,7 @@ class DetectorTest : public ::testing::Test {
     std::vector<Detection> detections;
 
     void SetUp() override {
-        detector = Detectors::yolov5("models/detector_cpu.torchscript", "labels/classes.txt");
+        detector = Detectors::yolov5("models/detector_gpu.torchscript", "labels/classes.txt");
     }
 
     void TearDown() override {}
@@ -53,5 +53,6 @@ TEST_F(DetectorTest, readModel_noError) {
 };
 
 TEST_F(DetectorTest, runDetect_noError) {
+    //    ASSERT_NO_FATAL_FAILURE(detector->detectImage("videos/sample2.jpg"));
     ASSERT_NO_FATAL_FAILURE(detector->detectVideo("/dev/video0"));
 }
