@@ -5,6 +5,8 @@
 #ifndef DETECTOR_H
 #define DETECTOR_H
 
+#include <ft-detector/bbox_intersect_notifier.h>
+
 #include <opencv2/opencv.hpp>
 
 struct Detection {
@@ -15,6 +17,8 @@ struct Detection {
 
 class Detector {
    public:
+    Detector();
+
     virtual void detect(const cv::Mat &img, std::vector<Detection> &detections) = 0;
 
     virtual void loadModel(const std::string &model_path) = 0;
@@ -33,6 +37,9 @@ class Detector {
 
    protected:
     std::vector<std::string> labels_;
+
+   private:
+    std::unique_ptr<IntersectNotifier> notifier_ = std::make_unique<IntersectNotifier>();
 };
 
 #endif  // DETECTOR_H
