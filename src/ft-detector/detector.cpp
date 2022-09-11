@@ -54,8 +54,9 @@ void Detector::detectImage(const std::string &imgPath, bool show) {
 }
 
 void Detector::drawBoxes(cv::Mat &img, const std::vector<Detection> &detections) {
-    const std::vector<cv::Scalar> colors = {cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 0),
-                                            cv::Scalar(0, 255, 255), cv::Scalar(255, 0, 0)};
+    const std::vector<cv::Scalar> colors = {cv::Scalar(0, 0, 255),      // Hand
+                                            cv::Scalar(255, 255, 255),  // Person
+                                            cv::Scalar(0, 255, 0)};     // Face
 
     for (const auto &detection : detections) {
         auto box = detection.box;

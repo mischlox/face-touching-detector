@@ -1,9 +1,22 @@
+#include <ft-detector/utils.h>
 #include <ft-detector/yolov5.h>
 #include <spdlog/spdlog.h>
 
-YoloV5::YoloV5(const std::string &modelPath, const std::string &labelsPath,
-               const torch::Device &device)
-    : device_(device) {
+YoloV5::YoloV5(const std::string &modelPath, const std::string &labelsPath, bool enableGPU) {
+    if (enableGPU) {
+        if (torch::hasCUDA()) {
+            spdlog::info("GPU found");
+            spdlog::info("Run inference on GPU");
+            device_ = torch::kCUDA;
+        } else {
+            spdlog::warn("No GPU available. Fallback to CPU");
+            device_ = torch::kCPU;
+        }
+    } else {
+        spdlog::info("Run inference on CPU");
+        device_ = torch::kCPU;
+    }
+
     loadModel(modelPath);
     readLabels(labelsPath);
 }
@@ -15,6 +28,7 @@ void YoloV5::loadModel(const std::string &modelPath) {
         spdlog::error("Loading the model failed!");
         std::exit(EXIT_FAILURE);
     }
+    model_->to(device_);
 }
 
 void YoloV5::preprocess(cv::Mat &img) {
@@ -129,13 +143,30 @@ void YoloV5::postprocess(torch::Tensor &modelOutput, std::vector<Detection> &det
 }
 
 void YoloV5::detect(const cv::Mat &inputImage, std::vector<Detection> &detections) {
+    Timer clock;
+
     cv::Mat img;
     inputImage.copyTo(img);
 
+    // Preprocessing
+    clock.tick();
     preprocess(img);
+    auto imgTensor = imgToTensor(img).to(device_);
+    clock.tock();
+    auto preprocTime = clock.elapsedTime();
 
-    torch::Tensor modelOutput =
-        model_->forward({imgToTensor(img)}).toTuple()->elements()[0].toTensor();
+    // Inference
+    clock.tick();
+    auto modelOutput = model_->forward({imgTensor}).toTuple()->elements()[0].toTensor().cpu();
+    clock.tock();
+    auto inferTime = clock.elapsedTime();
 
+    // Postprocessing
+    clock.tick();
     postprocess(modelOutput, detections, inputImage.cols, inputImage.rows);
+    clock.tock();
+    auto postprocTime = clock.elapsedTime();
+
+    spdlog::info("Timing:\tPreproc: {0}ms\tInference: {1}ms\tPostproc: {1}ms", preprocTime,
+                 inferTime, postprocTime);
 }
