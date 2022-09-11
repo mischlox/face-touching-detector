@@ -98,7 +98,6 @@ bool Detector::boxesOverlap(const std::vector<Detection> &detections) {
                 if ((detA.classID == 2 && detB.classID == 3) ||
                     (detA.classID == 3 && detB.classID == 2)) {
                     int overlap = (detA.box & detB.box).area();
-                    spdlog::info("Area of overlap: {}", overlap);
                     return overlap > 0;
                 }
             }
