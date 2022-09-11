@@ -167,6 +167,6 @@ void YoloV5::detect(const cv::Mat &inputImage, std::vector<Detection> &detection
     clock.tock();
     auto postprocTime = clock.elapsedTime();
 
-    spdlog::info("Timing:\tPreproc: {0}ms\tInference: {1}ms\tPostproc: {1}ms", preprocTime,
-                 inferTime, postprocTime);
+    spdlog::debug("Timing:\tPreproc: {0}ms\tInference: {1}ms\tPostproc: {1}ms", preprocTime,
+                  inferTime, postprocTime);
 }
