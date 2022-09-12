@@ -23,6 +23,8 @@ class MainWindow : public QMainWindow {
     void on_ocvButton_clicked();
 
    private:
+    bool isRunning_ = false;
+
     std::unique_ptr<Ui::MainWindow> ui;
 
     std::unique_ptr<FTdetectorCapture> cap_;

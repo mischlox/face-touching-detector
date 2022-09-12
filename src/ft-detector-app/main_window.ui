@@ -24,7 +24,7 @@
                             </size>
                         </property>
                         <property name="text">
-                            <string>OpenCV</string>
+                            <string>Start</string>
                         </property>
                     </widget>
                 </item>
@@ -49,8 +49,8 @@
                 </item>
                 <item row="0" column="2">
                     <widget class="QLabel" name="label">
-                        <property name="text">
-                            <string>STOP TOUCHING!</string>
+                        <property name="alignment">
+                            <set>Qt::AlignCenter</set>
                         </property>
                     </widget>
                 </item>
