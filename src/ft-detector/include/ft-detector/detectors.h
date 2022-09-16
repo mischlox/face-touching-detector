@@ -7,8 +7,9 @@
  */
 class Detectors {
    public:
-    static std::unique_ptr<Detector> yolov5(const std::string &modelPath,
-                                            const std::string &classListPath, bool useGPU = true) {
+    static std::unique_ptr<Detector> yolov5(const std::string &modelPath = MODEL_PATH,
+                                            const std::string &classListPath = LABELS_PATH,
+                                            bool useGPU = true) {
         return std::make_unique<YoloV5>(modelPath, classListPath, useGPU);
     }
 };

@@ -1,4 +1,6 @@
 add_subdirectory(ft-detector)
+add_subdirectory(ft-detector-app)
+
 find_package(Boost COMPONENTS program_options REQUIRED)
 
 add_executable(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/src/main.cpp)
