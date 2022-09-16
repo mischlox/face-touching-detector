@@ -1,32 +1,30 @@
-#include "ft_detector_capture.h"
+#include "detector_qt.h"
 
 #include <QDebug>
 
-FTdetectorCapture::FTdetectorCapture(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {}
+detectorQT::detectorQT(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {}
 
-void FTdetectorCapture::run() {
-    auto detector = Detectors::yolov5("models/detector_gpu.torchscript", "labels/classes.txt");
-    if (videoCap_.isOpened()) {
-        while (true) {
-            std::vector<Detection> detections;
+void detectorQT::run() {
+    auto detector = Detectors::yolov5();
+    while (videoCap_.isOpened()) {
+        std::vector<Detection> detections;
 
-            videoCap_ >> frame_;
-            if (!frame_.empty()) {
-                detector->detect(frame_, detections);
-                detector->drawBoxes(frame_, detections);
-                pixmap_ = cvMatToQPixmap(frame_);
-                emit newPixMapCaptured();
-            }
-            if (detector->boxesOverlap(detections)) {
-                emit boxesOverlap();
-            } else {
-                emit boxesDoNotOverlap();
-            }
+        videoCap_ >> frame_;
+        if (!frame_.empty()) {
+            detector->detect(frame_, detections);
+            detector->drawBoxes(frame_, detections);
+            pixmap_ = cvMatToQPixmap(frame_);
+            emit newPixMapCaptured();
+        }
+        if (detector->boxesOverlap(detections)) {
+            emit boxesOverlap();
+        } else {
+            emit boxesDoNotOverlap();
         }
     }
 }
 
-QImage FTdetectorCapture::cvMatToQImage(const cv::Mat &inMat) {
+QImage detectorQT::cvMatToQImage(const cv::Mat &inMat) {
     switch (inMat.type()) {
         // 8-bit, 4 channel
         case CV_8UC4: {
@@ -79,6 +77,6 @@ QImage FTdetectorCapture::cvMatToQImage(const cv::Mat &inMat) {
     return QImage();
 }
 
-QPixmap FTdetectorCapture::cvMatToQPixmap(const cv::Mat &inMat) {
+QPixmap detectorQT::cvMatToQPixmap(const cv::Mat &inMat) {
     return QPixmap::fromImage(cvMatToQImage(inMat));
 }

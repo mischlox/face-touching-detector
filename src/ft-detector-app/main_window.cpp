@@ -6,18 +6,18 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    cap_ = std::make_unique<FTdetectorCapture>(this);
+    cap_ = std::make_unique<detectorQT>(this);
 
     // clang-format off
     connect(cap_.get(),
-            &FTdetectorCapture::newPixMapCaptured,
+            &detectorQT::newPixMapCaptured,
             this,
             [&]() {
                 ui->frame->setPixmap(cap_->pixmap().scaled(cap_->frame().cols, cap_->frame().rows));
             });
 
     connect(cap_.get(),
-            &FTdetectorCapture::boxesOverlap,
+            &detectorQT::boxesOverlap,
             this,
             [&]() {
                 QSound::play("media/sounds/beep.wav");
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             });
 
     connect(cap_.get(),
-            &FTdetectorCapture::boxesDoNotOverlap,
+            &detectorQT::boxesDoNotOverlap,
             this,
             [&]() {
                 ui->label->setText(QString("Good!"));

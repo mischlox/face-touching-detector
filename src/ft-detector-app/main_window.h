@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "ft_detector_capture.h"
+#include "detector_qt.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow {
 
     std::unique_ptr<Ui::MainWindow> ui;
 
-    std::unique_ptr<FTdetectorCapture> cap_;
+    std::unique_ptr<detectorQT> cap_;
 };
 
 #endif  // FACE_TOUCHING_DETECTOR_MAIN_WINDOW_H

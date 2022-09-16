@@ -4,7 +4,7 @@
 #include <ft-detector/detector.h>
 #include <ft-detector/yolov5_config.h>
 
-// QT also uses slots so undef before including to avoid conflicts
+// QT also uses slots, so undef before including to avoid conflicts
 #undef slots
 #include <torch/script.h>
 #define slots Q_SLOTS
@@ -13,7 +13,8 @@
 
 class YoloV5 : public Detector {
    public:
-    YoloV5(const std::string &modelPath, const std::string &labelsPath, bool enableGPU = true);
+    YoloV5(const std::string &modelPath = MODEL_PATH, const std::string &labelsPath = LABELS_PATH,
+           bool enableGPU = true);
 
     void loadModel(const std::string &modelPath) override;
     void detect(const cv::Mat &inputImage, std::vector<Detection> &detections) override;

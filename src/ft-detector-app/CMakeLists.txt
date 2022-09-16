@@ -9,8 +9,8 @@ add_executable(ft-detector-app
         main_window.cpp
         main_window.h
         main_window.ui
-        ft_detector_capture.cpp
-        ft_detector_capture.h
+        detector_qt.cpp
+        detector_qt.h
         )
 
 target_link_libraries(ft-detector-app PRIVATE ft-detector Qt5::Widgets Qt5::Multimedia)

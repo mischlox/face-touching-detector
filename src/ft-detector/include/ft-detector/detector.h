@@ -1,7 +1,3 @@
-//
-// Created by mischlox on 25.08.22.
-//
-
 #ifndef DETECTOR_H
 #define DETECTOR_H
 

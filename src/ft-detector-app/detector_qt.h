@@ -1,5 +1,5 @@
-#ifndef FACE_TOUCHING_DETECTOR_FT_DETECTOR_CAPTURE_H
-#define FACE_TOUCHING_DETECTOR_FT_DETECTOR_CAPTURE_H
+#ifndef DETECTOR_QT_H
+#define DETECTOR_QT_H
 #include <ft-detector/detectors.h>
 
 #include <QImage>
@@ -11,10 +11,11 @@
 /**
  * QT compatible wrapper for ft-detector
  */
-class FTdetectorCapture : public QThread {
+class detectorQT : public QThread {
     Q_OBJECT
    public:
-    explicit FTdetectorCapture(QObject* parent = nullptr);
+    explicit detectorQT(QObject* parent = nullptr);
+
     QPixmap pixmap() const { return pixmap_; }
     cv::Mat frame() const { return frame_; }
    signals:
@@ -34,4 +35,4 @@ class FTdetectorCapture : public QThread {
     QPixmap cvMatToQPixmap(const cv::Mat& inMat);
 };
 
-#endif  // FACE_TOUCHING_DETECTOR_FT_DETECTOR_CAPTURE_H
+#endif  // DETECTOR_QT_H
