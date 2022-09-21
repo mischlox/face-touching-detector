@@ -2,8 +2,12 @@
 
 Face Touching Detector is an application that prevents me from touching my face by detecting the overlap of hands and faces.
 
-<p align="center>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/oIkSHqMhEus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p align="center">
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=oIkSHqMhEus" target="_blank">
+ <img src="https://img.youtube.com/vi/oIkSHqMhEus/0.jpg" alt="Watch the video" width="240" height="180" border=2 />
+</a>
 </p>
 
 * What does the app?
