@@ -8,16 +8,17 @@ YoloV5::YoloV5(const std::string &modelPath, const std::string &labelsPath, bool
             spdlog::info("GPU found");
             spdlog::info("Run inference on GPU");
             device_ = torch::kCUDA;
+            loadModel(modelPath);
         } else {
-            spdlog::warn("No GPU available. Fallback to CPU");
+            spdlog::warn("No GPU available. Fallback to CPU with model {}", MODEL_CPU_PATH);
             device_ = torch::kCPU;
+            loadModel(MODEL_CPU_PATH);
         }
     } else {
         spdlog::info("Run inference on CPU");
         device_ = torch::kCPU;
+        loadModel(MODEL_CPU_PATH);
     }
-
-    loadModel(modelPath);
     readLabels(labelsPath);
 }
 
