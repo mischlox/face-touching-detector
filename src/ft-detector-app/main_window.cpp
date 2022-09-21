@@ -4,7 +4,7 @@
 
 #include "ui_main_window.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     cap_ = std::make_unique<detectorQT>(this);
 
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             [&]() {
                 QSound::play("media/sounds/beep.wav");
                 ui->label->setText(QString("STOP TOUCHING!!!"));
-                ui->label->setStyleSheet("QLabel {background-color: red;}");
+                ui->label->setStyleSheet(LABEL_RED);
             });
 
     connect(cap_.get(),
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             this,
             [&]() {
                 ui->label->setText(QString("Good!"));
-                ui->label->setStyleSheet("QLabel {background-color: green;}");
+                ui->label->setStyleSheet(LABEL_GREEN);
             });
     // clang-format on
 }
