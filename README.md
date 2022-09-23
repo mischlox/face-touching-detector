@@ -2,36 +2,62 @@
 
 Face Touching Detector is an application that prevents me from touching my face by detecting the overlap of hands and faces.
 
+## Contributions
 
+* **YOLOv5**m model trained on hands-faces-dataset
+* **Libtorch C++** implementation of YOLOv5 inference
+* **Docker Container Image** for easy deployment
+* Simple **QT5** GUI for visualisation of results
+* **Detector Interface** that allows to implement other detector-applications
 
-<p align="center">
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=oIkSHqMhEus" target="_blank">
- <img src="https://img.youtube.com/vi/oIkSHqMhEus/0.jpg" alt="Watch the video" width="240" height="180" border=2 />
+## Demo video
+
+<div style="text-align: center;">
+<a href="https://www.youtube.com/watch?feature=player_embedded&v=oIkSHqMhEus" target="_blank">
+ <img src="https://img.youtube.com/vi/oIkSHqMhEus/0.jpg" alt="Watch the video" width="480" />
 </a>
-</p>
-
-* What does the app?
-* Why did I use the technologies I used
-* Challenges and features that will be implemented
+</div>
 
 ## Getting started
 
-### Dependencies
+### Environment
 
-Todo: add versions
+This application was tested in the following environment.
 
-* OpenCV
-* Libtorch
-* Spdlog
-* Boost Program Options
-* QT
-* CUDA (optional but recommended)
+* GPU: GeForce GTX 1660 SUPER
+* Ubuntu 20.04
+* CUDA 11.3
+* OpenCV 4.2.0
+* Libtorch 1.12.1
+* Spdlog 1.10.0
+* Boost Program Options 1.71.0
+* QT 5.12.8
 
-### Installation
+### Download Libtorch
 
-### Usage
+Select version compatible to your environment from [here](https://pytorch.org/get-started/locally/), e.g. for CUDA 11.3:
+
+    wget https://download.pytorch.org/libtorch/cu113/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcu113.zip
+    unzip libtorch-cxx11-abi-shared-with-deps-1.12.1+cu113.zip -d deps/
+
+### Build and run from Docker container
+
+Install Nvidia Container Toolkit for GPU support
+
+    sudo apt-get update
+    sudo apt-get install nvidia-container-toolkit
+
+Build container
+
+    ./docker_build.sh
+
+Run application
+
+    ./docker_run.sh
 
 ## Train and deploy custom model
+
+todo
 
 ## License
 
@@ -39,4 +65,3 @@ Todo: add versions
 
 * yolov5
 * hands faces dataset
-* 
