@@ -13,8 +13,8 @@
 
 class YoloV5 : public Detector {
    public:
-    YoloV5(const std::string &modelPath = MODEL_GPU_PATH,
-           const std::string &labelsPath = LABELS_PATH, bool enableGPU = true);
+    explicit YoloV5(const std::string &modelPath = MODEL_GPU_PATH,
+                    const std::string &labelsPath = LABELS_PATH, bool enableGPU = true);
 
     void loadModel(const std::string &modelPath) override;
     void detect(const cv::Mat &inputImage, std::vector<Detection> &detections) override;
