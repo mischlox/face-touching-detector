@@ -1,4 +1,6 @@
 find_package(GTest REQUIRED)
+find_package(Torch REQUIRED)
+
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(TEST_SUITE test_ftdetector)

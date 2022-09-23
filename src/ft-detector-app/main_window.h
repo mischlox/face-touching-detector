@@ -23,6 +23,15 @@ class MainWindow : public QMainWindow {
     void on_ocvButton_clicked();
 
    private:
+    const QString LABEL_STYLE =
+        "QLabel { "
+        "border: 2px solid rgb(113, 113, 113);"
+        "border-width: 2px;"
+        "border-radius: 10px;";
+
+    const QString LABEL_RED = LABEL_STYLE + "background-color: rgb(179, 0, 0);}";
+    const QString LABEL_GREEN = LABEL_STYLE + "background-color: rgb(5, 123, 16);}";
+
     bool isRunning_ = false;
 
     std::unique_ptr<Ui::MainWindow> ui;
