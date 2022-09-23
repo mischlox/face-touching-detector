@@ -1,12 +1,12 @@
-FROM pytorch/libtorch-cxx11-builder:cuda11.5-main
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu18.04
+ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /app
 
 # Install CMake
-RUN rm -f /opt/conda/bin/cmake
-
 RUN apt-get remove -y --purge cmake && \
     apt-get update -y && \
+    apt-get install -y gpg wget && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | \
     gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
     apt-get update && \
@@ -19,11 +19,5 @@ RUN apt-get update -y && apt-get autoremove -y && \
                         libopencv-dev \
                         qt5-default \
                         qtmultimedia5-dev
-
-
-COPY ./ ./
-
-RUN mkdir -p /app/build_docker && cd /app/build_docker && \
-    cmake .. && make
 
 ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
