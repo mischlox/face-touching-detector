@@ -1,6 +1,6 @@
 # Binaries and Deps
-build/
-deps/
+build*/
+deps/libtorch
 
 # IntelliJ
 .idea/
