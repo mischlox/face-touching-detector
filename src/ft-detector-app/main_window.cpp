@@ -59,3 +59,17 @@ void MainWindow::on_sliderVolume_valueChanged(int value) {
     soundBeep_->setVolume(float(value) / 100);
     ui->labelVolume->setText(QString("Volume: " + QString::number(value) + "%"));
 }
+
+void MainWindow::on_sliderConfidence_valueChanged(int value) {
+    float val = float(value) / 100.0f;
+
+    cap_->detector()->setConfThres(val);
+    ui->labelConfidence->setText(QString("Confidence Threshold: " + QString::number(val)));
+}
+
+void MainWindow::on_sliderNMS_valueChanged(int value) {
+    float val = float(value) / 100.0f;
+
+    cap_->detector()->setNMSThres(float(value) / 100);
+    ui->labelNMS->setText(QString("NMS Threshold: " + QString::number(val)));
+}

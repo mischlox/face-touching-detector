@@ -79,28 +79,28 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="labelConfidence">
        <property name="text">
         <string>Confidence Threshold</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="horizontalSlider_2">
+      <widget class="QSlider" name="sliderConfidence">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="labelNMS">
        <property name="text">
         <string>NMS Threshold</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="horizontalSlider">
+      <widget class="QSlider" name="sliderNMS">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>

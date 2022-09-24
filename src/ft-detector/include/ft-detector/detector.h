@@ -31,8 +31,16 @@ class Detector {
 
     std::vector<std::string> getLabels() { return labels_; }
 
+    void setNMSThres(float nmsThreshold) { nmsThreshold_ = nmsThreshold; }
+    void setConfThres(float confThreshold) { confidenceThreshold_ = confThreshold; }
+
+    float getNMSThreshold() const { return nmsThreshold_; }
+    float getConfidenceThreshold() const { return confidenceThreshold_; }
+
    protected:
     std::vector<std::string> labels_;
+    float nmsThreshold_;
+    float confidenceThreshold_;
 
    private:
     std::unique_ptr<IntersectNotifier> notifier_ = std::make_unique<IntersectNotifier>();

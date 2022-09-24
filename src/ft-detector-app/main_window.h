@@ -22,6 +22,8 @@ class MainWindow : public QMainWindow {
    private slots:
     void on_ocvButton_clicked();
     void on_sliderVolume_valueChanged(int value);
+    void on_sliderNMS_valueChanged(int value);
+    void on_sliderConfidence_valueChanged(int value);
 
    private:
     const QString STYLE_LABEL =
