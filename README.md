@@ -4,7 +4,7 @@ Face Touching Detector is an application that prevents me from touching my face 
 
 ## Contributions
 
-* **YOLOv5**m model trained on hands-faces-dataset
+* **YOLOv5**m model trained on [Human-Parts Dataset](https://github.com/xiaojie1017/Human-Parts.git)
 * **Libtorch C++** implementation of YOLOv5 inference
 * **Docker Container Image** for easy deployment
 * Simple **QT5** GUI for visualisation of results
@@ -33,12 +33,20 @@ This application was tested in the following environment.
 * Boost Program Options 1.71.0
 * QT 5.12.8
 
-### Download Libtorch
+### Installation
+#### Download Libtorch
 
 Select version compatible to your environment from [here](https://pytorch.org/get-started/locally/), e.g. for CUDA 11.3:
 
     wget https://download.pytorch.org/libtorch/cu113/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcu113.zip
     unzip libtorch-cxx11-abi-shared-with-deps-1.12.1+cu113.zip -d deps/
+
+#### Build
+
+    mkdir build 
+    cd build
+    cmake ..
+    make
 
 ### Build and run from Docker container
 
@@ -51,17 +59,14 @@ Build container
 
     ./docker_build.sh
 
-Run application
-
-    ./docker_run.sh
+Run docker container interactively with the provided script ```./docker_run.sh``` and build app
 
 ## Train and deploy custom model
 
 todo
 
-## License
-
 ## Acknowledgements
 
-* yolov5
-* hands faces dataset
+* [YOLOv5](https://github.com/ultralytics/yolov5)
+* [YOLOv5 in Libtorch](https://github.com/Nebula4869/YOLOv5-LibTorch/) 
+* [Human-Parts Dataset](https://github.com/xiaojie1017/Human-Parts.git)
