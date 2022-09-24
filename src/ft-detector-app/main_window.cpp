@@ -57,6 +57,5 @@ void MainWindow::on_ocvButton_clicked() {
 
 void MainWindow::on_sliderVolume_valueChanged(int value) {
     soundBeep_->setVolume(float(value) / 100);
-    std::cout << float(value) / 100 << std::endl;
     ui->labelVolume->setText(QString("Volume: " + QString::number(value) + "%"));
 }
