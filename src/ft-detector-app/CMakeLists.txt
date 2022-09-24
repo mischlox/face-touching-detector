@@ -12,6 +12,7 @@ add_executable(ft-detector-app
         main_window.ui
         detector_qt.cpp
         detector_qt.h
+        ${CMAKE_SOURCE_DIR}/res/resources.qrc
         )
 
 target_link_libraries(ft-detector-app PRIVATE ft-detector Qt5::Widgets Qt5::Multimedia)
