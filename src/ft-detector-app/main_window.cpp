@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     soundBeep_->setSource(QUrl::fromLocalFile((":/sounds/beep.wav")));
     soundBeep_->setVolume(volume_);
-    ui->sliderVolume->setTickPosition(QSlider::TickPosition(volume_ * 100));
+    ui->sliderVolume->setValue(volume_ * 100);
     soundBeep_->setLoopCount(QSoundEffect::Infinite);
 
     // clang-format off
