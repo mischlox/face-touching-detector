@@ -15,14 +15,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // clang-format off
     connect(cap_.get(),
-            &detectorQT::newPixMapCaptured,
+            &DetectorQT::newPixMapCaptured,
             this,
             [&]() {
                 ui->frame->setPixmap(cap_->pixmap().scaled(cap_->frame().cols, cap_->frame().rows));
             });
 
     connect(cap_.get(),
-            &detectorQT::boxesOverlap,
+            &DetectorQT::boxesOverlap,
             this,
             [&]() {
                 if(!soundBeep_->isPlaying()) {
@@ -33,12 +33,19 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
             });
 
     connect(cap_.get(),
-            &detectorQT::boxesDoNotOverlap,
+            &DetectorQT::boxesDoNotOverlap,
             this,
             [&]() {
                 soundBeep_->stop();
                 ui->label->setText(QString("Good!"));
                 ui->label->setStyleSheet(LABEL_GREEN);
+            });
+
+    connect(cap_->fpsEmitter().get(),
+            &FPSEmitter::updateFPS,
+            this,
+            [&]() {
+                ui->labelFPS->setText(QString::number(cap_->fpsEmitter()->getFPS(), 'G', 2) + " FPS");
             });
     // clang-format on
 }
