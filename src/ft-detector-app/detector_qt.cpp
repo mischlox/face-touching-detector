@@ -2,10 +2,11 @@
 
 #include <QDebug>
 
-detectorQT::detectorQT(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {}
+detectorQT::detectorQT(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {
+    detector_ = Detectors::yolov5();
+}
 
 void detectorQT::run() {
-    detector_ = Detectors::yolov5();
     while (videoCap_.isOpened()) {
         std::vector<Detection> detections;
 
