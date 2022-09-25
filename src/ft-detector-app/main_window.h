@@ -49,7 +49,7 @@ class MainWindow : public QMainWindow {
 
     std::unique_ptr<Ui::MainWindow> ui;
 
-    std::unique_ptr<detectorQT> cap_ = std::make_unique<detectorQT>(this);
+    std::unique_ptr<DetectorQT> cap_ = std::make_unique<DetectorQT>(this);
 
     void updateSliderConfidence(int value);
     void updateSliderNMS(int value);
