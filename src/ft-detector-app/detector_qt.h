@@ -18,6 +18,9 @@ class detectorQT : public QThread {
 
     QPixmap pixmap() const { return pixmap_; }
     cv::Mat frame() const { return frame_; }
+
+    std::shared_ptr<Detector> detector() { return detector_; };
+
    signals:
     void newPixMapCaptured();
     void boxesOverlap();
@@ -27,6 +30,7 @@ class detectorQT : public QThread {
     void run() override;
 
    private:
+    std::shared_ptr<Detector> detector_;
     QPixmap pixmap_;
     cv::VideoCapture videoCap_;
     cv::Mat frame_;
