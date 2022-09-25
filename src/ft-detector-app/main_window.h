@@ -32,14 +32,13 @@ class MainWindow : public QMainWindow {
         "border-width: 2px;"
         "border-radius: 10px;";
     const QString STYLE_PLAY_BUTTON =
-        "#ocvButton {"
-        "background-color: transparent;"
+        "QPushButton{ background-color: transparent;"
         "background: none;"
         "border: none;"
         "background-repeat: none;";
 
-    const QString BUTTON_PLAY = STYLE_PLAY_BUTTON + "border-image: url(:/images/play.png)};";
-    const QString BUTTON_PAUSE = STYLE_PLAY_BUTTON + "border-image: url(:/images/pause.png)};";
+    const QString BUTTON_PLAY = STYLE_PLAY_BUTTON + "border-image: url(:/images/play.png);}";
+    const QString BUTTON_PAUSE = STYLE_PLAY_BUTTON + "border-image: url(:/images/pause.png);}";
     const QString LABEL_RED = STYLE_LABEL + "background-color: rgb(179, 0, 0);}";
     const QString LABEL_GREEN = STYLE_LABEL + "background-color: rgb(5, 123, 16);}";
 
