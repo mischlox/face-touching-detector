@@ -56,7 +56,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelModel">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>YOLOv5</string>
        </property>
@@ -87,6 +94,12 @@
      </item>
      <item>
       <widget class="QSlider" name="sliderConfidence">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -101,6 +114,9 @@
      </item>
      <item>
       <widget class="QSlider" name="sliderNMS">
+       <property name="maximum">
+        <number>100</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -190,6 +206,9 @@ background-repeat: none
      </item>
      <item>
       <widget class="QSlider" name="sliderVolume">
+       <property name="maximum">
+        <number>100</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>

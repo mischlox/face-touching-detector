@@ -50,7 +50,10 @@ class MainWindow : public QMainWindow {
     std::unique_ptr<Ui::MainWindow> ui;
 
     std::unique_ptr<detectorQT> cap_ = std::make_unique<detectorQT>(this);
-    ;
+
+    void updateSliderConfidence(int value);
+    void updateSliderNMS(int value);
+    void updateSliderVolume(int value);
 };
 
 #endif  // FACE_TOUCHING_DETECTOR_MAIN_WINDOW_H
