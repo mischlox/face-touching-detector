@@ -43,7 +43,7 @@ class MainWindow : public QMainWindow {
     const QString LABEL_GREEN = STYLE_LABEL + "background-color: rgb(5, 123, 16);}";
 
     std::unique_ptr<QSoundEffect> soundBeep_ = std::make_unique<QSoundEffect>(this);
-    float volume_ = 0.5;
+    float volume_ = 1.0;
 
     bool isRunning_ = false;
 
