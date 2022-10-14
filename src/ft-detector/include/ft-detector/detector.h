@@ -23,7 +23,7 @@ class Detector {
 
     void drawBoxes(cv::Mat &img, const std::vector<Detection> &detections);
 
-    bool boxesOverlap(const std::vector<Detection> &detections);
+    static bool boxesOverlap(const std::vector<Detection> &detections);
 
     void detectImage(const std::string &imgPath, bool show = true);
 

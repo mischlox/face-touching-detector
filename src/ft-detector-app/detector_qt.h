@@ -23,7 +23,7 @@ class FPSEmitter : public QThread {
 
    protected:
     void run() override;
-    float fps_;
+    float fps_ = 0;
     bool isRunning_ = true;
 };
 
@@ -57,8 +57,8 @@ class DetectorQT : public QThread {
     cv::VideoCapture videoCap_;
     cv::Mat frame_;
 
-    QImage cvMatToQImage(const cv::Mat& inMat);
-    QPixmap cvMatToQPixmap(const cv::Mat& inMat);
+    static QImage cvMatToQImage(const cv::Mat& inMat);
+    static QPixmap cvMatToQPixmap(const cv::Mat& inMat);
 };
 
 #endif  // DETECTOR_QT_H
