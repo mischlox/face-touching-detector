@@ -80,7 +80,6 @@ void Detector::drawBoxes(cv::Mat &img, const std::vector<Detection> &detections)
         // Left aligned class name
         cv::putText(img, labels_[classId], cv::Point(box.x, box.y - 5), cv::FONT_HERSHEY_SIMPLEX,
                     0.5, cv::Scalar(0, 0, 0));
-
         // Right aligned confidence
         cv::putText(img, confidence, cv::Point(box.x + box.width - 40, box.y - 5),
                     cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
@@ -88,17 +87,14 @@ void Detector::drawBoxes(cv::Mat &img, const std::vector<Detection> &detections)
 }
 
 bool Detector::boxesOverlap(const std::vector<Detection> &detections) {
-    std::vector<Detection> handDets, faceDets;
-
-    for (int i = 0; i < detections.size(); ++i) {
-        for (int j = i + 1; j < detections.size(); ++j) {
-            auto detA = detections[i];
-            auto detB = detections[j];
-            if (detA.box != detB.box) {
-                if ((detA.classID == 2 && detB.classID == 3) ||
-                    (detA.classID == 3 && detB.classID == 2)) {
-                    int overlap = (detA.box & detB.box).area();
-                    return overlap > 0;
+    for (auto &detectionA : detections) {
+        // If class ID of detection A is face, then iterate again over all detections
+        if (detectionA.classID == 2) {
+            for (auto &detectionB : detections) {
+                // If class ID of detection B is hand and detection A overlaps with detection B then
+                // return true
+                if (detectionB.classID == 3 && ((detectionA.box & detectionB.box).area() > 0)) {
+                    return true;
                 }
             }
         }
