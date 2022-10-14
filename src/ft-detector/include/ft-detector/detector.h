@@ -23,7 +23,7 @@ class Detector {
 
     void drawBoxes(cv::Mat &img, const std::vector<Detection> &detections);
 
-    bool boxesOverlap(const std::vector<Detection> &detections);
+    static bool boxesOverlap(const std::vector<Detection> &detections);
 
     void detectImage(const std::string &imgPath, bool show = true);
 
@@ -31,8 +31,16 @@ class Detector {
 
     std::vector<std::string> getLabels() { return labels_; }
 
+    void setNMSThres(float nmsThreshold) { nmsThreshold_ = nmsThreshold; }
+    void setConfThres(float confThreshold) { confidenceThreshold_ = confThreshold; }
+
+    float getNMSThreshold() const { return nmsThreshold_; }
+    float getConfidenceThreshold() const { return confidenceThreshold_; }
+
    protected:
     std::vector<std::string> labels_;
+    float nmsThreshold_;
+    float confidenceThreshold_;
 
    private:
     std::unique_ptr<IntersectNotifier> notifier_ = std::make_unique<IntersectNotifier>();

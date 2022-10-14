@@ -19,6 +19,9 @@ YoloV5::YoloV5(const std::string &modelPath, const std::string &labelsPath, bool
         device_ = torch::kCPU;
         loadModel(MODEL_CPU_PATH);
     }
+
+    setNMSThres(NMS_THRESHOLD);
+    setConfThres(CONFIDENCE_THRESHOLD);
     readLabels(labelsPath);
 }
 
@@ -56,7 +59,8 @@ std::vector<torch::Tensor> YoloV5::nms(torch::Tensor &preds) {
         // Filter by scores
         torch::Tensor scores =
             pred.select(1, 4) * std::get<0>(torch::max(pred.slice(1, 5, pred.sizes()[1]), 1));
-        pred = torch::index_select(pred, 0, torch::nonzero(scores > SCORE_THRESHOLD).select(1, 0));
+        pred = torch::index_select(pred, 0,
+                                   torch::nonzero(scores > confidenceThreshold_).select(1, 0));
         if (pred.sizes()[0] == 0) continue;
 
         // (center_x, center_y, w, h) to (left, top, right, bottom)
@@ -114,7 +118,7 @@ std::vector<torch::Tensor> YoloV5::nms(torch::Tensor &preds) {
                 (areas.select(0, indexes[0].item().toInt()) +
                  torch::index_select(areas, 0, indexes.slice(0, 1, indexes.sizes()[0])) - overlaps);
             indexes = torch::index_select(indexes, 0,
-                                          torch::nonzero(ious <= NMS_THRESHOLD).select(1, 0) + 1);
+                                          torch::nonzero(ious <= nmsThreshold_).select(1, 0) + 1);
         }
         keep = keep.toType(torch::kInt64);
         output.push_back(torch::index_select(dets, 0, keep.slice(0, 0, count)));

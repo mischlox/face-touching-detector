@@ -1,30 +1,39 @@
 #include "detector_qt.h"
 
+#include <ft-detector/utils.h>
+
 #include <QDebug>
 
-detectorQT::detectorQT(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {}
+DetectorQT::DetectorQT(QObject *parent) : QThread(parent), videoCap_(ID_CAM) {
+    detector_ = Detectors::yolov5();
+    fpsEmitter_ = std::make_shared<FPSEmitter>(parent);
+}
 
-void detectorQT::run() {
-    auto detector = Detectors::yolov5();
+void DetectorQT::run() {
+    Timer clock;
+    fpsEmitter_->start();
     while (videoCap_.isOpened()) {
+        clock.tick();
         std::vector<Detection> detections;
 
         videoCap_ >> frame_;
         if (!frame_.empty()) {
-            detector->detect(frame_, detections);
-            detector->drawBoxes(frame_, detections);
+            detector_->detect(frame_, detections);
+            detector_->drawBoxes(frame_, detections);
             pixmap_ = cvMatToQPixmap(frame_);
             emit newPixMapCaptured();
         }
-        if (detector->boxesOverlap(detections)) {
+        if (detector_->boxesOverlap(detections)) {
             emit boxesOverlap();
         } else {
             emit boxesDoNotOverlap();
         }
+        clock.tock();
+        fpsEmitter_->setFPS(1000.0f / clock.elapsedTime());
     }
 }
 
-QImage detectorQT::cvMatToQImage(const cv::Mat &inMat) {
+QImage DetectorQT::cvMatToQImage(const cv::Mat &inMat) {
     switch (inMat.type()) {
         // 8-bit, 4 channel
         case CV_8UC4: {
@@ -77,6 +86,17 @@ QImage detectorQT::cvMatToQImage(const cv::Mat &inMat) {
     return QImage();
 }
 
-QPixmap detectorQT::cvMatToQPixmap(const cv::Mat &inMat) {
+QPixmap DetectorQT::cvMatToQPixmap(const cv::Mat &inMat) {
     return QPixmap::fromImage(cvMatToQImage(inMat));
+}
+
+DetectorQT::~DetectorQT() { fpsEmitter_->terminate(); }
+
+FPSEmitter::FPSEmitter(QObject *parent) : QThread(parent) {}
+
+void FPSEmitter::run() {
+    while (isRunning_) {
+        emit updateFPS();
+        QThread::sleep(1);
+    }
 }

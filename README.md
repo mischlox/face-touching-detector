@@ -13,8 +13,8 @@ Face Touching Detector is an application that prevents me from touching my face 
 ## Demo video
 
 <div style="text-align: center;">
-<a href="https://www.youtube.com/watch?feature=player_embedded&v=oIkSHqMhEus" target="_blank">
- <img src="https://img.youtube.com/vi/oIkSHqMhEus/0.jpg" alt="Watch the video" width="480" />
+<a href="https://www.youtube.com/watch?feature=player_embedded&v=ZcUlyH9H7Ng" target="_blank">
+ <img src="https://img.youtube.com/vi/ZcUlyH9H7Ng/0.jpg" alt="Watch the video" width="480" />
 </a>
 </div>
 
@@ -42,7 +42,9 @@ Select version compatible to your environment from [here](https://pytorch.org/ge
     unzip libtorch-cxx11-abi-shared-with-deps-1.12.1+cu113.zip -d deps/
 
 #### Build
-
+    
+    git clone https://github.com/mischlox/face-touching-detector.git
+    git submodule update --init
     mkdir build 
     cd build
     cmake ..
@@ -60,10 +62,6 @@ Build container
     ./docker_build.sh
 
 Run docker container interactively with the provided script ```./docker_run.sh``` and build app
-
-## Train and deploy custom model
-
-todo
 
 ## Acknowledgements
 
